@@ -11,7 +11,8 @@
 
  Laravel      | Package
 :-------------|:----------
-  5.4.x        | 2.1.x
+  5.5.x        | 2.3.x
+  5.4.x        | 2.2.x
   5.3.x        | 2.0.x
   5.2.x        | 1.0.x
 
@@ -20,7 +21,7 @@
 Add the new required package in your composer.json
 
 ```
-"highideas/laravel-users-online": "^2.1"
+"highideas/laravel-users-online": "^2.3"
 ```
 Run `composer update` or `php composer.phar update`.
 
@@ -30,14 +31,7 @@ Or install directly via composer
 composer require highideas/laravel-users-online
 ```
 
-After composer command, add new service provider in `config/app.php` :
-
-```php
-HighIdeas\UsersOnline\UsersOnlineServiceProvider::class,
-HighIdeas\UsersOnline\Providers\UsersOnlineEventServiceProvider::class,
-```
-
-And add new middleware in `app/Http/Kernel.php` :
+After composer command, add new middleware in `app/Http/Kernel.php` :
 
 ```php
 \HighIdeas\UsersOnline\Middleware\UsersOnline::class,
@@ -53,6 +47,9 @@ class User extends Authenticatable
 ...
 
 ```
+Finally run `php artisan vendor:publish` for add the namespaces
+
+## Usage
 
 For show the users online just use the method `allOnline()`:
 
@@ -67,5 +64,18 @@ $user = User::find($id);
 $user->isOnline();
 ```
 
-Finally run `php artisan vendor:publish` for add the namespaces
+You can sort all users online with the methods `mostRecentOnline()` and `leastRecentOnline()`:
 
+```php
+$user = new User;
+$user->mostRecentOnline();
+$user->leastRecentOnline();
+```
+
+**Installation and usage on last versions of framework:**
+
+[Laravel 5.4](instructions/5.4.md)
+
+[Laravel 5.3](instructions/5.3.md)
+
+[Laravel 5.2](instructions/5.2.md)
