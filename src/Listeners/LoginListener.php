@@ -2,19 +2,19 @@
 
 namespace HighIdeas\UsersOnline\Listeners;
 
-class LogoutListener
+class LoginListener
 {
     /**
      * Handle the event.
      *
-     * @param auth.logout $event
+     * @param auth.login $event
      *
      * @return void
      */
     public function handle($event)
     {
         if ($event->user !== null) {
-            $event->user->pullCache();
+            $event->user->setCache(config('session.lifetime') * 60);
         }
     }
 }
